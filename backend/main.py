@@ -11,11 +11,14 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="HRMS Lite API", version="1.0.0")
 
-# CORS — allow frontend dev server and deployed Vercel URL
+# CORS configuration
+# allow_origins: lists specific domains
+# allow_origin_regex: handles all *.vercel.app subdomains
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://*.vercel.app"],
+    allow_origins=["http://localhost:5173", "https://hrm_lite_project.vercel.app"],
     allow_credentials=True,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_methods=["*"],
     allow_headers=["*"],
 )
